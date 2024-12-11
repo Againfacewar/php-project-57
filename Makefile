@@ -1,5 +1,5 @@
 start:
-	php artisan serve --host 0.0.0.0 --port 8000
+	PHP_CLI_SERVER_WORKERS=5 php artisan serve --host 0.0.0.0 --port 8000
 
 start-frontend:
 	npm run dev
