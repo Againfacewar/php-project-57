@@ -16,6 +16,9 @@ jobs:
       - name: Setup project
         run: make setup
 
+      - name: Run tests
+        run: make test
+
       - name: Linter
         run: make lint
 
