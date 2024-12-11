@@ -2,4 +2,4 @@
 [![hexlet-project-ci](https://github.com/Againfacewar/php-project-57/actions/workflows/hexlet-project-ci.yml/badge.svg)](https://github.com/Againfacewar/php-project-57/actions/workflows/hexlet-project-ci.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2ba9eab0fa5d03a1bf14/maintainability)](https://codeclimate.com/github/Againfacewar/php-project-57/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2ba9eab0fa5d03a1bf14/test_coverage)](https://codeclimate.com/github/Againfacewar/php-project-57/test_coverage)
-## [Site here](https://php-project-57-9kw3.onrender.com/)
+## [Site here](https://php-project-57-5xs8.onrender.com)
