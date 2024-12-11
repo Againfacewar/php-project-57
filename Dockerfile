@@ -17,8 +17,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN cp .env.example .env
-
 RUN composer install
 RUN npm ci
 RUN npm run build
