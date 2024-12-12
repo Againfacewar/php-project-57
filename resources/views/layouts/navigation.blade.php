@@ -6,20 +6,20 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a class="flex items-center" href="{{ route('dashboard') }}">
-                        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Менеджер задач</span>
+                        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">{{ __('hexlet.navigation.logo') }}</span>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        Задачи
+                        {{ __('hexlet.navigation.tasks') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('task_statuses.index')" :active="request()->routeIs('task_statuses.index')">
+                        {{ __('hexlet.navigation.statuses') }}
                     </x-nav-link>
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        Статусы
-                    </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        Метки
+                        {{ __('hexlet.navigation.tags') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -42,7 +42,7 @@
 
                         <x-slot name="content">
                             <x-dropdown-link :href="route('profile.edit')">
-                                Профиль
+                                {{ __('hexlet.navigation.dropdown.profile') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->
@@ -52,7 +52,7 @@
                                 <x-dropdown-link :href="route('logout')"
                                                  onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    Выйти
+                                    {{ __('hexlet.navigation.dropdown.logout') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
