@@ -16,6 +16,9 @@ jobs:
       - name: Setup project
         run: make setup
 
+      - name: Start project
+        run: make start
+
       - name: Run tests
         run: make test
 
