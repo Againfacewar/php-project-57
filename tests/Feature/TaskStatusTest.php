@@ -37,7 +37,7 @@ class TaskStatusTest extends TestCase
     {
         $user = \App\Models\User::factory()->create();
         $taskStatus = TaskStatus::factory()->create();
-        $response = $this->actingAs($user)->get(route('task_statuses.edit', [$taskStatus]));
+        $response = $this->actingAs($user)->get(route('task_statuses.edit', $taskStatus));
         $response->assertOk();
     }
 
