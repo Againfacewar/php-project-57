@@ -22,3 +22,4 @@ RUN npm ci
 RUN npm run build
 
 CMD ["bash", "-c", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"]
+CMD ["bash", "-c", "php artisan db:seed"]
