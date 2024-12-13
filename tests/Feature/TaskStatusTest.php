@@ -36,8 +36,8 @@ class TaskStatusTest extends TestCase
     public function testEdit()
     {
         $user = \App\Models\User::factory()->create();
-        $status = TaskStatus::factory()->create();
-        $response = $this->actingAs($user)->get(route('task_statuses.edit', [$status]));
+        $taskStatus = TaskStatus::factory()->create();
+        $response = $this->actingAs($user)->get(route('task_statuses.edit', [$taskStatus]));
         $response->assertOk();
     }
 
@@ -55,9 +55,9 @@ class TaskStatusTest extends TestCase
     public function testUpdate()
     {
         $user = \App\Models\User::factory()->create();
-        $status = TaskStatus::factory()->create();
+        $taskStatus = TaskStatus::factory()->create();
         $data = TaskStatus::factory()->make()->only('name');
-        $response = $this->actingAs($user)->patch(route('task_statuses.update', $status), $data);
+        $response = $this->actingAs($user)->patch(route('task_statuses.update', $taskStatus), $data);
         $response->assertRedirect(route('task_statuses.index'));
         $response->assertSessionHasNoErrors();
 
