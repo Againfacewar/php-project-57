@@ -13,11 +13,23 @@ jobs:
         with:
           php-version: '8.2'
 
-      - name: Setup project
-        run: make setup
+      - name: Install dependencies
+        run: composer install
 
-      - name: Start project
-        run: php artisan serve
+      - name: Copy .env
+        run: cp .env.example .env
+
+      - name: Generate key
+        run: php artisan key:generate --ansi
+
+      - name: Create SQLite database
+        run: |
+          touch database/database.sqlite
+          php artisan migrate
+          php artisan db:seed
+
+      - name: Run tests
+        run: make test
 
       - name: Run tests
         run: make test
