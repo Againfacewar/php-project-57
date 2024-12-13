@@ -13,27 +13,17 @@ jobs:
         with:
           php-version: '8.2'
 
-      - name: Install dependencies
-        run: composer install
-
-      - name: Copy .env
-        run: cp .env.example .env
-
-      - name: Generate key
-        run: php artisan key:generate --ansi
-
-      - name: Create SQLite database
-        run: |
-          touch database/database.sqlite
-          php artisan migrate
-          php artisan db:seed
+      - name: Setup project
+        run: make setup
 
       - name: Run tests
         run: make test
 
-      - name: Run tests
-        run: make test
-
+      - name: Upload logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: logs
+          path: ./logs
 #      - name: Linter
 #        run: make lint
 
