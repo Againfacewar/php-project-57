@@ -4,7 +4,7 @@
         {{ __('hexlet.statuses.title') }}
     </x-slot>
     @can('create', \App\Models\TaskStatus::class)
-    <div class="w-full h-full my-5">
+    <div class="w-full h-full mb-5 mt-10">
         <a href="{{ route('task_statuses.create') }}" class="rounded-md bg-indigo-600 px-4 py-3 text-xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             {{ __('hexlet.statuses.actions.create') }}
         </a>

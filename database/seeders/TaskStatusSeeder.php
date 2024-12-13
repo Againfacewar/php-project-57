@@ -13,16 +13,16 @@ class TaskStatusSeeder extends Seeder
      */
     private array $statuses = [
         [
-            'name' => 'новый'
+            'name' => 'новая'
         ],
         [
-            'name' => 'в работе'
+            'name' => 'завершена'
         ],
         [
             'name' => 'на тестировании'
         ],
         [
-            'name' => 'завершен'
+            'name' => 'в работе'
         ]
     ];
     public function run(): void
