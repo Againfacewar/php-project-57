@@ -21,7 +21,7 @@ class TaskTest extends TestCase
     public function testIndex()
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get(route('/tasks'));
+        $response = $this->actingAs($user)->get(route('tasks.index'));
         $response->assertOk();
     }
 
