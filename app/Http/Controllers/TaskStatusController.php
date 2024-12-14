@@ -33,8 +33,8 @@ class TaskStatusController extends Controller
     public function store(TaskStatusStoreRequest $request)
     {
         \Gate::authorize('create', TaskStatus::class);
-        $date = $request->validated();
-        TaskStatus::query()->create($date);
+        $data = $request->validated();
+        TaskStatus::query()->create($data);
         flash('Статус успешно создан!')->success();
 
         return redirect()->route('task_statuses.index');
@@ -46,6 +46,7 @@ class TaskStatusController extends Controller
      */
     public function edit(TaskStatus $taskStatus)
     {
+        \Gate::authorize('update', $taskStatus);
         return view('task-status.edit', ['status' => $taskStatus]);
     }
 
@@ -54,6 +55,7 @@ class TaskStatusController extends Controller
      */
     public function update(TaskStatusUpdateRequest $request, TaskStatus $taskStatus)
     {
+        \Gate::authorize('update', $taskStatus);
         $data = $request->validated();
         $taskStatus->update($data);
         flash('Статус успешно изменён')->success();
@@ -66,9 +68,16 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
+        \Gate::authorize('delete', $taskStatus);
+        if ($taskStatus->tasks()->count() > 0) {
+            flash('Не удалось удалить татус')->error();
+
+            return redirect()->back();
+        }
+
         $taskStatus->delete();
 
-        flash('Статус успешно удален')->success();
+        flash('Статус успешно удален!')->success();
 
         return redirect()->route('task_statuses.index');
     }

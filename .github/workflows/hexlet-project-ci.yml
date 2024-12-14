@@ -17,10 +17,7 @@ jobs:
         run: make setup
 
       - name: Run tests
-        run: |
-          mkdir -p build/logs
-          php artisan test --log-junit build/logs/test-results.xml
-
+        run: make test
 
 #      - name: Linter
 #        run: make lint
@@ -33,9 +30,3 @@ jobs:
           coverageCommand: make test-coverage
           coverageLocations: build/logs/clover.xml:clover
           debug: true
-
-      - name: Upload logs
-        uses: actions/upload-artifact@v3
-        with:
-          name: logs
-          path: ./logs

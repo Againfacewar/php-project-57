@@ -1,4 +1,4 @@
-@section('title', 'Статусы')
+@section('title', __('hexlet.statuses.title') )
 <x-app-layout>
     <x-slot name="title">
         {{ __('hexlet.statuses.title') }}

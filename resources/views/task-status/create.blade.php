@@ -1,9 +1,10 @@
+@section('title', __('hexlet.statuses.title'))
 <x-app-layout>
     <x-slot name="title">
-        Создать статус
+        {{ __('hexlet.statuses.actions.create') }}
     </x-slot>
 
-    <form action="{{ route('task_statuses.store') }}" method="POST" class="w-1/2">
+    <form action="{{ route('task_statuses.store') }}" method="POST" class="w-1/4">
         @csrf
         <x-input-label for="name" :value="__('hexlet.statuses.form.labels.name')" />
         <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />

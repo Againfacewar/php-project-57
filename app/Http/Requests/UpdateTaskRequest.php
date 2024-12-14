@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\TaskStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TaskStatusStoreRequest extends FormRequest
+class UpdateTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +22,10 @@ class TaskStatusStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:task_statuses'
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-          'name.unique' => __('hexlet.validation.status.unique')
+            'name' => 'required',
+            'description' => 'nullable',
+            'status_id' => 'required',
+            'assigned_to_id' => 'nullable'
         ];
     }
 }
