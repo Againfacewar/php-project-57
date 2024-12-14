@@ -17,7 +17,7 @@ jobs:
         run: make setup
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
-        run: make test-coverage
+        run: make test
 
 #      - name: Linter
 #        run: make lint
