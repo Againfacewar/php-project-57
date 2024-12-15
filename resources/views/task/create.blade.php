@@ -50,7 +50,7 @@
                 </select>
             </div>
         </div>
-        @if(!empty($labels))
+        @if($labels->count() > 0)
         <div class="mb-2 w-full">
             <label for="labels[]" class="block font-medium text-sm text-gray-700 dark:text-gray-300">{{ __('hexlet.tasks.form.labels.labels') }}</label>
             <div class="mt-2 grid grid-cols-1">
