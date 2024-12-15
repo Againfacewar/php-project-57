@@ -19,8 +19,8 @@ jobs:
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: make test
 
-#      - name: Linter
-#        run: make lint
+      - name: Linter
+        run: make lint
 
       - name: Run test & publish code coverage
         uses: paambaati/codeclimate-action@v3.0.0

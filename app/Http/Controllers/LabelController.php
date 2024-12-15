@@ -21,7 +21,8 @@ class LabelController extends Controller
      */
     public function create()
     {
-        \Gate::authorize('create', Label::class);;
+        \Gate::authorize('create', Label::class);
+        ;
 
         return view('label.create');
     }

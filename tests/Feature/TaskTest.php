@@ -16,6 +16,7 @@ class TaskTest extends TestCase
      * A basic feature test example.
      */
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      */
