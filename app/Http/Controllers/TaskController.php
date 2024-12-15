@@ -8,6 +8,7 @@ use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
@@ -15,11 +16,20 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::with('status', 'creator', 'creator')->orderBy('created_at')->get();
+        $statuses = TaskStatus::all();
+        $users = User::all();
 
-        return view('task.index', ['tasks' => $tasks]);
+        $tasks = Task::with('status', 'creator', 'creator')->orderBy('created_at')->get();
+        $filter = $request->get('filter') ?? null;
+
+        return view('task.index', [
+            'tasks' => $tasks,
+            'statuses' => $statuses,
+            'users' => $users,
+            'filter' => $filter
+        ]);
     }
 
     /**
