@@ -18,7 +18,7 @@ class TaskFactory extends Factory
             'description' => $this->faker->paragraph,
             'status_id' => TaskStatus::factory(),
             'created_by_id' => User::factory(),
-            'assigned_to_id' => User::factory(),
+            'assigned_to_id' => User::factory()
         ];
     }
 }

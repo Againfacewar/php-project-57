@@ -1,4 +1,4 @@
-@section('title', __('hexlet.tasks.actions.create'))
+@section('title', __('hexlet.tasks.create.title'))
 <x-app-layout>
     <x-slot name="title">
         {{ __('hexlet.tasks.actions.create') }}
@@ -8,7 +8,7 @@
         @csrf
         <div class="mb-2 w-full">
             <x-input-label for="name" :value="__('hexlet.tasks.form.labels.name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"  autofocus />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
         <div class="mb-2 w-full">
@@ -25,7 +25,7 @@
                     @if(!old('status_id'))
                     <option value="" {{ old('status_id') ? '' : 'selected' }}>{{ __('hexlet.tasks.form.placeholders.status') }}</option>
                     @endif
-                    @foreach(\App\Models\TaskStatus::all() as $status)
+                    @foreach($statuses as $status)
                         <option value="{{ $status->id }}" {{ old('status_id') == $status->id ? 'selected' : '' }}>
                             {{ $status->name }}
                         </option>
@@ -42,7 +42,7 @@
                     @if(!old('assigned_to_id'))
                     <option value="" selected>{{ __('hexlet.tasks.form.placeholders.assigned') }}</option>
                     @endif
-                    @foreach(\App\Models\User::all() as $user)
+                    @foreach($users as $user)
                         <option value="{{  $user->id }}" {{ old('assigned_to_id') == $user->id ? 'selected' : '' }}>
                             {{ $user->name }}
                         </option>
@@ -50,6 +50,20 @@
                 </select>
             </div>
         </div>
+        @if(!empty($labels))
+        <div class="mb-2 w-full">
+            <label for="labels[]" class="block font-medium text-sm text-gray-700 dark:text-gray-300">{{ __('hexlet.tasks.form.labels.labels') }}</label>
+            <div class="mt-2 grid grid-cols-1">
+                <select id="labels[]" name="labels[]" multiple class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm/6">
+                    @foreach($labels as $label)
+                        <option value="{{ $label->id }}" @if(in_array($label->id, old('labels', []))) selected @endif>
+                            {{ $label->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        @endif
 
         <button type="submit" class="mt-4 rounded-md bg-indigo-600 px-3 py-2 text-xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             {{ __('hexlet.buttons.create') }}

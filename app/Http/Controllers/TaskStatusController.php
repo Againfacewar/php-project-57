@@ -14,7 +14,7 @@ class TaskStatusController extends Controller
      */
     public function index()
     {
-        return view('task-status.index', ['statuses' => TaskStatus::all()]);
+        return view('task-status.index', ['statuses' => TaskStatus::orderBy('created_at')->get()]);
     }
 
     /**
@@ -35,7 +35,7 @@ class TaskStatusController extends Controller
         \Gate::authorize('create', TaskStatus::class);
         $data = $request->validated();
         TaskStatus::query()->create($data);
-        flash('Статус успешно создан!')->success();
+        flash(__('hexlet.notify.status.success.create'))->success();
 
         return redirect()->route('task_statuses.index');
     }
@@ -47,6 +47,7 @@ class TaskStatusController extends Controller
     public function edit(TaskStatus $taskStatus)
     {
         \Gate::authorize('update', $taskStatus);
+
         return view('task-status.edit', ['status' => $taskStatus]);
     }
 
@@ -58,7 +59,7 @@ class TaskStatusController extends Controller
         \Gate::authorize('update', $taskStatus);
         $data = $request->validated();
         $taskStatus->update($data);
-        flash('Статус успешно изменён')->success();
+        flash(__('hexlet.notify.status.success.update'))->success();
 
         return redirect()->route('task_statuses.index');
     }
@@ -69,15 +70,15 @@ class TaskStatusController extends Controller
     public function destroy(TaskStatus $taskStatus)
     {
         \Gate::authorize('delete', $taskStatus);
-        if ($taskStatus->tasks()->count() > 0) {
-            flash('Не удалось удалить татус')->error();
+        if ($this->hasModelTaskRelation($taskStatus)) {
+            flash(__('hexlet.notify.status.error.destroy'))->error();
 
             return redirect()->back();
         }
 
         $taskStatus->delete();
 
-        flash('Статус успешно удален!')->success();
+        flash(__('hexlet.notify.status.success.destroy'))->success();
 
         return redirect()->route('task_statuses.index');
     }

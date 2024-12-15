@@ -20,7 +20,7 @@ class TaskStatusUpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.unique' => 'Статус с таким именем уже существует'
+            'name.unique' =>__('hexlet.validation.status.unique')
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
@@ -16,7 +17,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::with('status', 'creator', 'creator')->get();
+        $tasks = Task::with('status', 'creator', 'creator')->orderBy('created_at')->get();
 
         return view('task.index', ['tasks' => $tasks]);
     }
@@ -27,8 +28,15 @@ class TaskController extends Controller
     public function create()
     {
         \Gate::authorize('create', Task::class);
+        $labels = Label::all();
+        $users = User::all();
+        $statuses = TaskStatus::all();
 
-        return view('task.create');
+        return view('task.create', [
+            'labels' => $labels,
+            'users' => $users,
+            'statuses' => $statuses
+        ]);
     }
 
     /**
@@ -52,7 +60,11 @@ class TaskController extends Controller
 
         $task->save();
 
-        flash('Задача успешно создана!')->success();
+        if (isset($data['labels'])) {
+            $task->labels()->sync($data['labels']);
+        }
+
+        flash(__('hexlet.notify.task.success.create'))->success();
 
         return redirect()->route('tasks.index');
     }
@@ -64,7 +76,7 @@ class TaskController extends Controller
     {
         \Gate::authorize('view', $task);
 
-        return view('task.show', ['task' => $task->load('status')]);
+        return view('task.show', ['task' => $task->load('status', 'labels')]);
     }
 
     /**
@@ -73,8 +85,15 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         \Gate::authorize('update', $task);
-
-        return view('task.edit', ['task' => $task->load('status')]);
+        $labels = Label::all();
+        $users = User::all();
+        $statuses = TaskStatus::all();
+        return view('task.edit', [
+            'task' => $task->load('status', 'labels'),
+            'labels' => $labels,
+            'users' => $users,
+            'statuses' => $statuses
+        ]);
     }
 
     /**
@@ -89,13 +108,17 @@ class TaskController extends Controller
         $task->description = trim($data['description']);
         $task->status()->associate($status);
 
+        if (isset($data['labels'])) {
+            $task->labels()->sync($data['labels']);
+        }
+
         if (isset($data['assigned_to_id'])) {
             $task->assignedUser()->associate(User::find($data['assigned_to_id']));
         }
 
         $task->save();
 
-        flash('Задача успешно изменена!')->success();
+        flash(__('hexlet.notify.task.success.update'))->success();
 
         return redirect()->route('tasks.index');
     }
@@ -107,7 +130,7 @@ class TaskController extends Controller
     {
         \Gate::authorize('delete', $task);
         $task->delete();
-        flash('Задача успешно удалена!')->success();
+        flash(__('hexlet.notify.task.success.destroy'))->success();
 
         return redirect()->route('tasks.index');
     }

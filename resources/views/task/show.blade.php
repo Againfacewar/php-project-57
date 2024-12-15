@@ -13,7 +13,14 @@
                         class="text-gray-400">{{ $task->description }}</span></div>
         @endif
 
-        {{--        <div class="text-xl text-white font-bold">{{ __('hexlet.tasks.show.fields.name') }} <span class="text-gray-400">{{ $task->name }}</span></div>--}}
+    </div>
+    <div class="text-white font-bold mb-1">
+        {{ __('hexlet.tasks.show.fields.labels') }}
+    </div>
+    <div class="flex gap-2 mb-8">
+        @foreach($task->labels as $label)
+            <span class="bg-indigo-100 text-gray-200 text-xs font-medium px-3.5 py-1.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300/10/10/20">{{ $label->name }}</span>
+        @endforeach
     </div>
     <div class="">
         @can('update', $task)

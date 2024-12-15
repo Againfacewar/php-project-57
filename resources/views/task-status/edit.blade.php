@@ -1,9 +1,10 @@
+@section('title', __('hexlet.statuses.edit.title'))
 <x-app-layout>
     <x-slot name="title">
-        Изменение статуса
+        {{__('hexlet.statuses.edit.title')}}
     </x-slot>
 
-    <form action="{{ route('task_statuses.update', $status) }}" method="POST" class="w-1/2">
+    <form action="{{ route('task_statuses.update', $status) }}" method="POST" class="w-1/4">
         @csrf
         @method('PATCH')
         <x-input-label for="name" :value="__('hexlet.statuses.form.labels.name')" />

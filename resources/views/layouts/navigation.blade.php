@@ -18,8 +18,8 @@
                     <x-nav-link :href="route('task_statuses.index')" :active="request()->routeIs('task_statuses.index')">
                         {{ __('hexlet.navigation.statuses') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('hexlet.navigation.tags') }}
+                    <x-nav-link :href="route('labels.index')" :active="request()->routeIs('labels.index')">
+                        {{ __('hexlet.navigation.labels') }}
                     </x-nav-link>
                 </div>
             </div>

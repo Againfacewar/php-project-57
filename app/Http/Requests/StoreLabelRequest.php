@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTaskRequest extends FormRequest
+class StoreLabelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,15 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'description' => 'nullable',
-            'status_id' => 'required',
-            'assigned_to_id' => 'nullable',
-            'labels' => 'array|nullable'
+            'name' => 'required|unique:labels',
+            'description' => 'nullable'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            "name.unique" => __('hexlet.validation.label.unique')
         ];
     }
 }

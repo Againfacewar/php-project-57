@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
@@ -49,11 +50,12 @@ class TaskTest extends TestCase
     {
         $user = User::factory()->create();
         $status = TaskStatus::factory()->create();
-
+        $label = Label::factory()->create()->id;
         $data = Task::factory()->make([
             'created_by_id' => $user->id,
             'status_id' => $status->id,
         ])->toArray();
+        $data['labels'] = [$label];
 
         $response = $this->actingAs($user)->post(route('tasks.store'), $data);
         $response->assertRedirect(route('tasks.index'));
@@ -65,24 +67,38 @@ class TaskTest extends TestCase
             'created_by_id' => $user->id,
             'status_id' => $status->id,
         ]);
+
+        $this->assertDatabaseHas('label_task', [
+            'label_id' => $label
+        ]);
     }
 
     public function testUpdate()
     {
         $user = User::factory()->create();
         $status = TaskStatus::factory()->create();
+        $label = Label::factory()->create()->id;
+        $label2 = Label::factory()->create()->id;
+        $labelForUpdate = Label::factory()->create()->id;
         $task = Task::factory()->create([
             'created_by_id' => $user->id,
             'status_id' => $status->id,
         ]);
+        $task->labels()->sync([$label, $label2]);
 
         $newData = Task::factory()->make()->only('name', 'description');
         $newData['status_id'] = $status->id;
+        $newData['labels'] = [$labelForUpdate];
         $response = $this->actingAs($user)->patch(route('tasks.update', $task), $newData);
         $response->assertRedirect(route('tasks.index'));
         $response->assertSessionHasNoErrors();
-
+        unset($newData['labels']);
         $this->assertDatabaseHas('tasks', $newData);
+
+        $this->assertDatabaseHas('label_task', [
+            'label_id' => $labelForUpdate,
+            'task_id' => $task->id
+        ]);
     }
 
     public function testDestroy()
