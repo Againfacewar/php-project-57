@@ -33,7 +33,7 @@ return [
         'registration' => 'Регистрация',
         'dropdown' => [
             'profile' => 'Профиль',
-            'logout' => 'Выйти'
+            'logout' => 'Выход'
         ]
     ],
     'buttons' => [
