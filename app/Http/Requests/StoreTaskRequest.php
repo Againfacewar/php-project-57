@@ -29,4 +29,11 @@ class StoreTaskRequest extends FormRequest
             'labels' => 'array|nullable'
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Это обязательное поле',
+        ];
+    }
 }
