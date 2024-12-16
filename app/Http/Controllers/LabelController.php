@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLabelRequest;
 use App\Http\Requests\UpdateLabelRequest;
 use App\Models\Label;
+use Illuminate\Http\Request;
 
 class LabelController extends Controller
 {
@@ -76,9 +77,10 @@ class LabelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Label $label)
+    public function destroy(Request $request, Label $label)
     {
         \Gate::authorize('delete', $label);
+        dd($request->all());
         if ($this->hasModelTaskRelation($label)) {
             flash(__('hexlet.notify.label.error.destroy'))->error();
 

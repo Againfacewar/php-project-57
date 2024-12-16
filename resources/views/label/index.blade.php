@@ -32,13 +32,14 @@
                     <td class="px-5 text-gray-300 py-5 bg-gray-900 whitespace-no-wrap">{{ $label->created_at->format('d.m.Y') }}</td>
                     @canany(['update', 'delete'], $label)
                         <td class="px-5 py-3 text-left text-xs font-semibold text-gray-300 tracking-wider">
-                            <form action="{{ route('labels.destroy', $label) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="mb-3 text-red-600 hover:text-red-900 cursor-pointer" onclick="return confirm({{ __('hexlet.confirm') }});">
-                                    {{ __('hexlet.labels.actions.delete') }}
-                                </button>
-                            </form>
+                            <a class="mb-3 text-red-600 hover:text-red-900 cursor-pointer"
+                               rel="nofollow"
+                               data-method="delete"
+                               data-confirm="{{ __('hexlet.confirm') }}"
+                               href="{{ route('labels.destroy', $label) }}"
+                            >
+                                {{ __('hexlet.labels.actions.delete') }}
+                            </a>
                             <a class="text-blue-500 hover:text-blue-900" href="{{ route('labels.edit', $label) }}">{{ __('hexlet.labels.actions.edit') }}</a>
                         </td>
                     @endcan

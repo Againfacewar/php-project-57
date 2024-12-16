@@ -75,13 +75,14 @@
                     <td class="px-5 text-gray-300 py-5 bg-gray-900 whitespace-no-wrap">{{ $task->created_at->format('d.m.Y') }}</td>
                     <td class="px-5 py-3 text-left text-xs font-semibold text-gray-300 tracking-wider">
                         @can('delete', $task)
-                        <form action="{{ route('tasks.destroy', $task) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="mb-3 text-red-600 hover:text-red-900 cursor-pointer" onclick="return confirm('Вы уверены, что хотите удалить этот элемент?');">
-                                {{ __('hexlet.statuses.actions.delete') }}
-                            </button>
-                        </form>
+                        <a class="mb-3 text-red-600 hover:text-red-900 cursor-pointer"
+                           rel="nofollow"
+                           data-method="delete"
+                           data-confirm="{{ __('hexlet.confirm') }}"
+                           href="{{ route('tasks.destroy', $task) }}"
+                        >
+                            {{ __('hexlet.statuses.actions.delete') }}
+                        </a>
                         @endcan
                         @can('update', $task)
                             <a class="text-blue-500 hover:text-blue-900" href="{{ route('tasks.edit', $task) }}">{{ __('hexlet.statuses.actions.edit') }}</a>
