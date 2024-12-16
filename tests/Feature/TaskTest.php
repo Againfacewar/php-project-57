@@ -36,7 +36,9 @@ class TaskTest extends TestCase
 
     public function testEdit()
     {
+        /** @var User $user */
         $user = User::factory()->create();
+        /** @var TaskStatus $status */
         $status = TaskStatus::factory()->create();
         $task = Task::factory()->create([
             'created_by_id' => $user->id,
@@ -50,13 +52,15 @@ class TaskTest extends TestCase
     public function testStore()
     {
         $user = User::factory()->create();
+        /** @var TaskStatus $status */
         $status = TaskStatus::factory()->create();
-        $label = Label::factory()->create()->id;
+        /** @var Label $label */
+        $label = Label::factory()->create();
         $data = Task::factory()->make([
             'created_by_id' => $user->id,
             'status_id' => $status->id,
         ])->toArray();
-        $data['labels'] = [$label];
+        $data['labels'] = [$label->id];
 
         $response = $this->actingAs($user)->post(route('tasks.store'), $data);
         $response->assertRedirect(route('tasks.index'));
@@ -70,7 +74,7 @@ class TaskTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('label_task', [
-            'label_id' => $label
+            'label_id' => $label->id
         ]);
     }
 
