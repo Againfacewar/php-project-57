@@ -11,42 +11,43 @@
         @endcan
     </div>
         <div class="w-full h-full mb-3">
-            <form class="w-full h-full flex justify-between" action="{{ route('tasks.index') }}" method="GET">
-                @csrf
-                <div class="flex gap-2 w-3/4">
-                    <select id="filter[status_id]" name="filter[status_id]" class="cursor-pointer w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm/6">
-                        <option value="" @if(!isset($filter['status_id'])) selected @endif>{{ __('hexlet.tasks.form.placeholders.filters.status') }}</option>
-                        @foreach($statuses as $status)
-                            <option value="{{  $status->id }}" @if(isset($filter['status_id']) && $filter['status_id'] == $status->id) selected @endif>
-                                {{ $status->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <select id="filter[created_by_id]" name="filter[created_by_id]" class="cursor-pointer w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm/6">
-                        <option value="" @if(!isset($filter['created_by_id'])) selected @endif>{{ __('hexlet.tasks.form.placeholders.filters.author') }}</option>=
-                        @foreach($users as $user)
-                            <option value="{{ $user->id }}" @if(isset($filter['created_by_id']) && $filter['created_by_id'] == $user->id) selected @endif>
-                                {{ $user->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <select id="filter[assigned_to_id]" name="filter[assigned_to_id]" class="cursor-pointer w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm/6">
-                        <option value="" @if(!isset($filter['assigned_to_id'])) selected @endif>{{ __('hexlet.tasks.form.placeholders.filters.assigned') }}</option>
-                        @foreach($users as $user)
-                            <option value="{{ $user->id }}" @if(isset($filter['assigned_to_id']) && $filter['assigned_to_id'] == $user->id) selected @endif>
-                                {{ $user->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="flex items-center">
-                    <button type="submit"
-                            class="rounded-md bg-indigo-600 px-4 py-3 text-xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        {{ __('hexlet.buttons.apply') }}
-                    </button>
-                </div>
-            </form>
+                @include('task.filter-form')
+{{--            <form class="w-full h-full flex justify-between" action="{{ route('tasks.index') }}" method="GET">--}}
+{{--                @csrf--}}
+{{--                <div class="flex gap-2 w-3/4">--}}
+{{--                    <select id="filter[status_id]" name="filter[status_id]" class="cursor-pointer w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm/6">--}}
+{{--                        <option value="" @if(!isset($filter['status_id'])) selected @endif>{{ __('hexlet.tasks.form.placeholders.filters.status') }}</option>--}}
+{{--                        @foreach($statuses as $status)--}}
+{{--                            <option value="{{  $status->id }}" @if(isset($filter['status_id']) && $filter['status_id'] == $status->id) selected @endif>--}}
+{{--                                {{ $status->name }}--}}
+{{--                            </option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+{{--                    <select id="filter[created_by_id]" name="filter[created_by_id]" class="cursor-pointer w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm/6">--}}
+{{--                        <option value="" @if(!isset($filter['created_by_id'])) selected @endif>{{ __('hexlet.tasks.form.placeholders.filters.author') }}</option>=--}}
+{{--                        @foreach($users as $user)--}}
+{{--                            <option value="{{ $user->id }}" @if(isset($filter['created_by_id']) && $filter['created_by_id'] == $user->id) selected @endif>--}}
+{{--                                {{ $user->name }}--}}
+{{--                            </option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+{{--                    <select id="filter[assigned_to_id]" name="filter[assigned_to_id]" class="cursor-pointer w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm/6">--}}
+{{--                        <option value="" @if(!isset($filter['assigned_to_id'])) selected @endif>{{ __('hexlet.tasks.form.placeholders.filters.assigned') }}</option>--}}
+{{--                        @foreach($users as $user)--}}
+{{--                            <option value="{{ $user->id }}" @if(isset($filter['assigned_to_id']) && $filter['assigned_to_id'] == $user->id) selected @endif>--}}
+{{--                                {{ $user->name }}--}}
+{{--                            </option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+{{--                </div>--}}
+{{--                <div class="flex items-center">--}}
+{{--                    <button type="submit"--}}
+{{--                            class="rounded-md bg-indigo-600 px-4 py-3 text-xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"--}}
+{{--                    >--}}
+{{--                        {{ __('hexlet.buttons.apply') }}--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--            </form>--}}
         </div>
 
     <div class="overflow-x-auto rounded-lg">
