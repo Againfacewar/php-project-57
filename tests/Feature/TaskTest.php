@@ -82,18 +82,24 @@ class TaskTest extends TestCase
     {
         $user = User::factory()->create();
         $status = TaskStatus::factory()->create();
-        $label = Label::factory()->create()->id;
-        $label2 = Label::factory()->create()->id;
+        /** @var Label $label */
+        $label = Label::factory()->create();
+        $labelId = $label->id;
+        /** @var Label $label2 */
+        $label2 = Label::factory()->create();
+        $label2Id = $label2->id;
+        /** @var Label $labelForUpdate */
         $labelForUpdate = Label::factory()->create()->id;
+        $labelForUpdateId = $labelForUpdate->id;
         $task = Task::factory()->create([
             'created_by_id' => $user->id,
             'status_id' => $status->id,
         ]);
-        $task->labels()->sync([$label, $label2]);
+        $task->labels()->sync([$labelId, $label2Id]);
 
         $newData = Task::factory()->make()->only('name', 'description');
         $newData['status_id'] = $status->id;
-        $newData['labels'] = [$labelForUpdate];
+        $newData['labels'] = [$labelForUpdateId];
         $response = $this->actingAs($user)->patch(route('tasks.update', $task), $newData);
         $response->assertRedirect(route('tasks.index'));
         $response->assertSessionHasNoErrors();
@@ -101,15 +107,18 @@ class TaskTest extends TestCase
         $this->assertDatabaseHas('tasks', $newData);
 
         $this->assertDatabaseHas('label_task', [
-            'label_id' => $labelForUpdate,
+            'label_id' => $labelForUpdateId,
             'task_id' => $task->id
         ]);
     }
 
     public function testDestroy()
     {
+        /** @var User $user */
         $user = User::factory()->create();
+        /** @var TaskStatus $status */
         $status = TaskStatus::factory()->create();
+        /** @var Task $task */
         $task = Task::factory()->create([
             'created_by_id' => $user->id,
             'status_id' => $status->id,
