@@ -21,7 +21,8 @@ class UpdateLabelRequest extends FormRequest
      */
     public function rules(): array
     {
-        $labelId = $this->route('label')->id;
+        $label = $this->route('label');
+        $labelId = is_object($label) ? $label->id : null;
         return [
             'name' => 'required|unique:labels,name,' . $labelId,
             'description' => 'nullable'

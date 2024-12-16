@@ -11,7 +11,9 @@ class TaskStatusUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $statusId = $this->route('task_status')->id;
+        $taskStatus = $this->route('task_status');
+        $statusId = is_object($taskStatus) ? $taskStatus->id : null;
+
         return [
             'name' => 'required|unique:task_statuses,name,' . $statusId
         ];

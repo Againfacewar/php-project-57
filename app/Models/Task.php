@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * Class Task
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property int $created_by_id
+ * @property int $status_id
+ */
 class Task extends Model
 {
     use HasFactory;
