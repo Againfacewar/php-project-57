@@ -151,6 +151,7 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         \Gate::authorize('delete', $task);
+        $task->labels()->detach();
         $task->delete();
         flash(__('hexlet.notify.task.success.destroy'))->success();
 
