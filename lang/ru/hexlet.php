@@ -25,7 +25,8 @@ return [
     'buttons' => [
       'create' => 'Создать',
         'edit' => 'Изменить',
-        'update' => 'Обновить'
+        'update' => 'Обновить',
+        'apply' => 'Применить'
     ],
     "statuses" => [
         'title' => 'Статусы',
@@ -80,7 +81,12 @@ return [
             ],
             'placeholders' => [
                 'status' => 'Выберите статус',
-                'assigned' => 'Выберите исполнителя'
+                'assigned' => 'Выберите исполнителя',
+                'filters' => [
+                    'status' => 'Статус',
+                    'author' => 'Автор',
+                    'assigned' => 'Исполнитель'
+                ]
             ]
         ],
         'show' => [
