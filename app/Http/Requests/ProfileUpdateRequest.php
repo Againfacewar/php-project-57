@@ -15,7 +15,8 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $userId = $this->user() ? $this->user()->id : null;
+        $user = $this->user();
+        $userId = isset($user) ? $this->user()->id : null;
 
         return [
             'name' => ['required', 'string', 'max:255'],
