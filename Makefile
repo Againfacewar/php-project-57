@@ -36,10 +36,10 @@ deploy:
 	git push heroku
 
 lint:
-	composer exec phpcs -- --standard=PSR12 app routes
+	composer exec phpcs -- --standard=PSR12 app routes tests
 
 lint-fix:
-	composer exec phpcbf -- --standard=PSR12 app routes
+	composer exec phpcbf -- --standard=PSR12 app routes tests
 
 ide-helper:
 	php artisan ide-helper:eloquent
