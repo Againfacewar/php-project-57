@@ -137,6 +137,7 @@ class TaskTest extends TestCase
     {
         $user = User::factory()->create();
         $secondUser = User::factory()->create();
+        /** @var TaskStatus $status */
         $status = TaskStatus::factory()->create();
         $task = Task::factory()->create([
             'created_by_id' => $user->id,
