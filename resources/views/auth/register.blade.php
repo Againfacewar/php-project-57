@@ -45,7 +45,7 @@
             </a>
 
             <x-primary-button class="ms-4">
-                {{ __('hexlet.buttons.register) }}
+                {{ __('hexlet.buttons.register') }}
             </x-primary-button>
         </div>
     </form>
