@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Label;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateLabelRequest extends FormRequest
@@ -21,8 +22,9 @@ class UpdateLabelRequest extends FormRequest
      */
     public function rules(): array
     {
+        /** @var Label $label */
         $label = $this->route('label');
-        $labelId = is_object($label) ? $label->id : null;
+        $labelId = $label->id;
         return [
             'name' => 'required|unique:labels,name,' . $labelId,
             'description' => 'nullable'

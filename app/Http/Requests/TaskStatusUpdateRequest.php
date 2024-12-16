@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\TaskStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TaskStatusUpdateRequest extends FormRequest
@@ -11,9 +12,9 @@ class TaskStatusUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $taskStatus = $this->route('task_status');
-        $statusId = is_object($taskStatus) ? $taskStatus->id : null;
-
+        /** @var TaskStatus $status */
+        $status = $this->route('task_status');
+        $statusId = $status->id;
         return [
             'name' => 'required|unique:task_statuses,name,' . $statusId
         ];
