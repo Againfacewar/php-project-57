@@ -81,6 +81,7 @@ class TaskTest extends TestCase
     public function testUpdate()
     {
         $user = User::factory()->create();
+        /** @var TaskStatus $status */
         $status = TaskStatus::factory()->create();
         /** @var Label $label */
         $label = Label::factory()->create();
@@ -91,6 +92,7 @@ class TaskTest extends TestCase
         /** @var Label $labelForUpdate */
         $labelForUpdate = Label::factory()->create();
         $labelForUpdateId = $labelForUpdate->id;
+        /** @var Task $task */
         $task = Task::factory()->create([
             'created_by_id' => $user->id,
             'status_id' => $status->id,
