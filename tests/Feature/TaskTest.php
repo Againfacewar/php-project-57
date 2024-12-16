@@ -89,7 +89,7 @@ class TaskTest extends TestCase
         $label2 = Label::factory()->create();
         $label2Id = $label2->id;
         /** @var Label $labelForUpdate */
-        $labelForUpdate = Label::factory()->create()->id;
+        $labelForUpdate = Label::factory()->create();
         $labelForUpdateId = $labelForUpdate->id;
         $task = Task::factory()->create([
             'created_by_id' => $user->id,
