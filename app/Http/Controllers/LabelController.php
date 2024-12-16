@@ -80,7 +80,6 @@ class LabelController extends Controller
     public function destroy(Request $request, Label $label)
     {
         \Gate::authorize('delete', $label);
-        dd($request->all());
         if ($this->hasModelTaskRelation($label)) {
             flash(__('hexlet.notify.label.error.destroy'))->error();
 
