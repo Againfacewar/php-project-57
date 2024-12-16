@@ -27,11 +27,16 @@
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ms-6 gap-4">
                     @auth()
-                        <x-dropdown-link :href="route('logout')"
-                                         onclick="event.preventDefault();
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                            {{ __('hexlet.navigation.dropdown.logout') }}
-                        </x-dropdown-link>
+                                {{ __('hexlet.navigation.dropdown.logout') }}
+                            </x-dropdown-link>
+                        </form>
                     @endauth
                     @guest()
                             <a href="{{ route('login') }}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Вход</a>
