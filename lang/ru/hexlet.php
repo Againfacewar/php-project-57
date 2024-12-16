@@ -1,6 +1,15 @@
 <?php
 
 return [
+    'auth' => [
+      'already_registered' => 'Уже зарегистрированы?',
+        'confirm' => 'Подтверждение',
+        'password' => 'Пароль',
+        'name' => 'Имя',
+        'remember' => 'Запомнить меня',
+        'forgot_password' => 'Забыли пароль?',
+        'login' => 'Войти'
+    ],
     'home_page' => [
         'title' => 'Привет от Хекслета!',
         'sub_title' => 'Это простой менеджер задач на Laravel',
@@ -31,7 +40,8 @@ return [
       'create' => 'Создать',
         'edit' => 'Изменить',
         'update' => 'Обновить',
-        'apply' => 'Применить'
+        'apply' => 'Применить',
+        'register' => 'Зарегистрировать'
     ],
     "statuses" => [
         'title' => 'Статусы',
