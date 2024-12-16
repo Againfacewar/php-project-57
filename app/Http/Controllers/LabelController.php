@@ -24,7 +24,9 @@ class LabelController extends Controller
         \Gate::authorize('create', Label::class);
         ;
 
-        return view('label.create');
+        return view('label.create', [
+            'label' => new Label()
+        ]);
     }
 
     /**

@@ -24,7 +24,9 @@ class TaskStatusController extends Controller
     {
         \Gate::authorize('create', TaskStatus::class);
 
-        return view('task-status.create');
+        return view('task-status.create', [
+            'status' => new TaskStatus()
+        ]);
     }
 
     /**

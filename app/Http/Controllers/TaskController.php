@@ -55,6 +55,7 @@ class TaskController extends Controller
         $statuses = TaskStatus::all();
 
         return view('task.create', [
+            'task' => new Task(),
             'labels' => $labels,
             'users' => $users,
             'statuses' => $statuses
