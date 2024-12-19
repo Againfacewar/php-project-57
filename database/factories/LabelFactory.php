@@ -13,8 +13,8 @@ class LabelFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => Str::limit($this->faker->word, 16),
-            'description' => Str::limit($this->faker->sentence, 100),
+            'name' => Str::limit($this->faker->word, 13),
+            'description' => Str::limit($this->faker->sentence, 97),
         ];
     }
 }
