@@ -28,7 +28,7 @@
                 <tr class="border-b border-gray-700">
                     <td class="px-5 text-gray-300 py-5 bg-gray-900 whitespace-no-wrap">{{ $label->id }}</td>
                     <td class="px-5 text-gray-300 py-5 bg-gray-900 whitespace-no-wrap">{{ $label->name }}</td>
-                    <td class="px-5 text-gray-300 py-5 bg-gray-900 whitespace-no-wrap">{{ \Str::limit($label->description, 32) }}</td>
+                    <td class="px-5 text-gray-300 py-5 bg-gray-900 whitespace-no-wrap">{{ $label->description }}</td>
                     <td class="px-5 text-gray-300 py-5 bg-gray-900 whitespace-no-wrap">{{ $label->created_at->format('d.m.Y') }}</td>
                     @canany(['update', 'delete'], $label)
                         <td class="px-5 py-3 text-left text-xs font-semibold text-gray-300 tracking-wider">
