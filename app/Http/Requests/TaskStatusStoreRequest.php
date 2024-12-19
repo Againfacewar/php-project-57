@@ -23,7 +23,7 @@ class TaskStatusStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:task_statuses'
+            'name' => 'required|unique:task_statuses|max:16'
         ];
     }
 
