@@ -26,7 +26,7 @@ class UpdateLabelRequest extends FormRequest
         $label = $this->route('label');
         $labelId = $label->id;
         return [
-            'name' => 'required|max:55|unique:labels,name,' . $labelId,
+            'name' => 'required|max:16|unique:labels,name,' . $labelId,
             'description' => 'nullable|max:100'
         ];
     }

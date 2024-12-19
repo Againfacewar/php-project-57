@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class TaskFactory extends Factory
 {
@@ -14,8 +15,8 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->sentence,
-            'description' => $this->faker->paragraph,
+            'name' => Str::limit($this->faker->sentence, 52),
+            'description' => Str::limit($this->faker->text, 97),
             'status_id' => TaskStatus::factory(),
             'created_by_id' => User::factory(),
             'assigned_to_id' => User::factory()

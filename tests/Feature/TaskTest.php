@@ -61,7 +61,6 @@ class TaskTest extends TestCase
             'status_id' => $status->id,
         ])->toArray();
         $data['labels'] = [$label->id];
-
         $response = $this->actingAs($user)->post(route('tasks.store'), $data);
         $response->assertRedirect(route('tasks.index'));
         $response->assertSessionHasNoErrors();

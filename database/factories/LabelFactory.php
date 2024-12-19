@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Label;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class LabelFactory extends Factory
 {
@@ -12,8 +13,8 @@ class LabelFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->sentence,
-            'description' => fake()->text
+            'name' => Str::limit($this->faker->word, 16),
+            'description' => Str::limit($this->faker->sentence, 100),
         ];
     }
 }
