@@ -3,17 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\Label;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class LabelTest extends TestCase
 {
-    use RefreshDatabase;
-
-    /**
-     * A basic feature test example.
-     */
     protected function setUp(): void
     {
         parent::setUp();

@@ -37,7 +37,6 @@ class TaskController extends Controller
         $filter = $request->get('filter') ?? null;
 
         return view('task.index', [
-            'task' => new Task(),
             'tasks' => $tasks,
             'statuses' => $statuses,
             'users' => $users,

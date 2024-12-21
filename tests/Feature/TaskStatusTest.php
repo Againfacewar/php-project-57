@@ -3,23 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\TaskStatus;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TaskStatusTest extends TestCase
 {
-    use RefreshDatabase;
-
-    /**
-     * A basic feature test example.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        TaskStatus::factory()->count(2)->make();
-    }
-
     public function testIndex()
     {
         $response = $this->get(route('task_statuses.index'));

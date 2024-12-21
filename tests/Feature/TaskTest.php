@@ -6,17 +6,10 @@ use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TaskTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    use RefreshDatabase;
-
     /**
      * A basic feature test example.
      */
